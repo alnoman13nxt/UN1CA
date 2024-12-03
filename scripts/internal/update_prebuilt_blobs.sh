@@ -34,20 +34,30 @@ if [ "$#" != 1 ]; then
 fi
 
 case "$1" in
-    "unica/patches/deknox")
+    "unica/patches/deknox/qssi")
         MODULE="$1"
         FW="SM-A736B/XME/352828291234563"
-        BLOBS="$(find "$SRC_DIR/unica/patches/deknox/system" -type f -not -name "*server*" | sed "s.$SRC_DIR/unica/patches/deknox.system.")"
+        BLOBS="$(find "$SRC_DIR/unica/patches/deknox/qssi/system" -type f -not -name "*server*" | sed "s.$SRC_DIR/unica/patches/deknox/qssi.system.")"
+        ;;
+    "unica/patches/deknox/essi")
+        MODULE="$1"
+        FW="SM-X516B/EUX/354136921234567"
+        BLOBS="$(find "$SRC_DIR/unica/patches/deknox/essi/system" -type f | sed "s.$SRC_DIR/unica/patches/deknox/essi.system.")"
         ;;
     "unica/patches/mass_cam")
         MODULE="$1"
         FW="SM-S711B/EUX/358615311234564"
         BLOBS="$(find "$SRC_DIR/unica/patches/mass_cam/system" -type f | sed "s.$SRC_DIR/unica/patches/mass_cam.system.")"
         ;;
-    "unica/patches/nfc")
+    "unica/patches/nfc/qssi")
         MODULE="$1"
         FW="SM-A736B/XME/352828291234563"
-        BLOBS="$(find "$SRC_DIR/unica/patches/nfc/system" -type f | sed "s.$SRC_DIR/unica/patches/nfc.system.")"
+        BLOBS="$(find "$SRC_DIR/unica/patches/nfc/qssi/system" -type f | sed "s.$SRC_DIR/unica/patches/nfc/qssi.system.")"
+        ;;
+    "unica/patches/nfc/essi")
+        MODULE="$1"
+        FW="SM-A166B/EUX/352907210123451"
+        BLOBS="$(find "$SRC_DIR/unica/patches/nfc/essi/system" -type f | sed "s.$SRC_DIR/unica/patches/nfc/essi.system.")"
         ;;
     "unica/patches/product_feature/fingerprint/optical_fod")
         MODULE="$1"
@@ -61,22 +71,39 @@ case "$1" in
         BLOBS="$(find "$SRC_DIR/unica/patches/product_feature/fingerprint/side_fp/system" -type f \
             | sed "s.$SRC_DIR/unica/patches/product_feature/fingerprint/side_fp.system.")"
         ;;
-    "unica/patches/product_feature/resolution")
+    "unica/patches/product_feature/resolution/qssi")
         MODULE="$1"
         FW="SM-S918B/EUX/350196551234562"
-        BLOBS="$(find "$SRC_DIR/unica/patches/product_feature/resolution/system" -type f \
-            | sed "s.$SRC_DIR/unica/patches/product_feature/resolution.system.")"
+        BLOBS="$(find "$SRC_DIR/unica/patches/product_feature/resolution/essi/system" -type f \
+            | sed "s.$SRC_DIR/unica/patches/product_feature/resolution/qssi.system.")"
         ;;
-    "unica/patches/ultra")
+    "unica/patches/product_feature/resolution/essi")
         MODULE="$1"
-        FW="SM-S918B/EUX/350196551234562"
-        BLOBS="$(find "$SRC_DIR/unica/patches/ultra/system" -type f | sed "s.$SRC_DIR/unica/patches/ultra.system.")"
+        FW="SM-S908B/EUX/350048581234569"
+        BLOBS="$(find "$SRC_DIR/unica/patches/product_feature/resolution/essi/system" -type f \
+            | sed "s.$SRC_DIR/unica/patches/product_feature/resolution/essi.system.")"
         ;;
-    "unica/patches/uwb")
+    "unica/patches/ultra/qssi")
         MODULE="$1"
         FW="SM-S918B/EUX/350196551234562"
-        BLOBS="$(find "$SRC_DIR/unica/patches/uwb/system" -type f | sed "s.$SRC_DIR/unica/patches/uwb.system.")"
-        BLOBS+="$(find "$SRC_DIR/unica/patches/uwb/system_ext" -type f -printf "\n%p" | sed "s.$SRC_DIR/unica/patches/uwb/..")"
+        BLOBS="$(find "$SRC_DIR/unica/patches/ultra/qssi/system" -type f | sed "s.$SRC_DIR/unica/patches/ultra/qssi.system.")"
+        ;;
+    "unica/patches/ultra/essi")
+        MODULE="$1"
+        FW="SM-S908B/EUX/350048581234569"
+        BLOBS="$(find "$SRC_DIR/unica/patches/ultra/essi/system" -type f | sed "s.$SRC_DIR/unica/patches/ultra/essi.system.")"
+        ;;
+    "unica/patches/uwb/qssi")
+        MODULE="$1"
+        FW="SM-S918B/EUX/350196551234562"
+        BLOBS="$(find "$SRC_DIR/unica/patches/uwb/qssi/system" -type f | sed "s.$SRC_DIR/unica/patches/uwb/qssi.system.")"
+        BLOBS+="$(find "$SRC_DIR/unica/patches/uwb/qssi/system_ext" -type f -printf "\n%p" | sed "s.$SRC_DIR/unica/patches/uwb/qssi/..")"
+        ;;
+    "unica/patches/uwb/essi")
+        MODULE="$1"
+        FW="SM-S908B/EUX/350048581234569"
+        BLOBS="$(find "$SRC_DIR/unica/patches/uwb/essi/system" -type f | sed "s.$SRC_DIR/unica/patches/uwb/essi.system.")"
+        BLOBS+="$(find "$SRC_DIR/unica/patches/uwb/essi/system_ext" -type f -printf "\n%p" | sed "s.$SRC_DIR/unica/patches/uwb/essi/.." | sed 's/system_ext/system\/system\/system_ext/' )"
         ;;
     "unica/patches/vndk/30")
         MODULE="$1"
@@ -98,10 +125,15 @@ case "$1" in
         FW="SM-S9210/CHC/356724910402671"
         BLOBS="$(find "$SRC_DIR/unica/mods/china/system" -type f | sed "s.$SRC_DIR/unica/mods/china.system.")"
         ;;
-    "unica/mods/eureka")
+    "unica/mods/eureka/qssi")
         MODULE="$1"
         FW="SM-S9210/CHC/356724910402671"
-        BLOBS="$(find "$SRC_DIR/unica/mods/eureka/system" -type f | sed "s.$SRC_DIR/unica/mods/eureka.system.")"
+        BLOBS="$(find "$SRC_DIR/unica/mods/eureka/qssi/system" -type f | sed "s.$SRC_DIR/unica/mods/eureka/qssi.system.")"
+        ;;
+    "unica/mods/eureka/essi")
+        MODULE="$1"
+        FW="SM-S921B/INS/350070121234560"
+        BLOBS="$(find "$SRC_DIR/unica/mods/eureka/essi/system" -type f | sed "s.$SRC_DIR/unica/mods/eureka/essi.system.")"
         ;;
     "target/a71/patches/stock_blobs")
         MODULE="$1"
